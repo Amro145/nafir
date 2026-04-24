@@ -1,0 +1,25 @@
+{
+  "kpiSummary": {
+    "totalPopulation": 8500,
+    "maxRegisteredUsers": 3180,
+    "maxActiveUsers": 2120,
+    "peakDAU": 742,
+    "avgNetworkUptimePercent": 92,
+    "avgSpeedMbps": 12,
+    "targetCoveragePercent": 90
+  },
+  "monthlyData": [
+    { "month": "Jan", "population": 8500, "registeredUsers": 1200, "activeUsers": 800, "dau": 280, "avgSpeedMbps": 8, "networkUptimePercent": 88, "costPerUserSDG": 10000, "educationUsagePercent": 35, "farmingUsagePercent": 25, "socialUsagePercent": 40 },
+    { "month": "Feb", "population": 8500, "registeredUsers": 1380, "activeUsers": 920, "dau": 322, "avgSpeedMbps": 8.8, "networkUptimePercent": 88.6, "costPerUserSDG": 9500, "educationUsagePercent": 36.5, "farmingUsagePercent": 25.8, "socialUsagePercent": 39.5 },
+    { "month": "Mar", "population": 8500, "registeredUsers": 1560, "activeUsers": 1040, "dau": 364, "avgSpeedMbps": 9.6, "networkUptimePercent": 89.2, "costPerUserSDG": 9000, "educationUsagePercent": 38, "farmingUsagePercent": 26.6, "socialUsagePercent": 39 },
+    { "month": "Apr", "population": 8500, "registeredUsers": 1740, "activeUsers": 1160, "dau": 406, "avgSpeedMbps": 10.4, "networkUptimePercent": 89.8, "costPerUserSDG": 8500, "educationUsagePercent": 39.5, "farmingUsagePercent": 27.4, "socialUsagePercent": 38.5 },
+    { "month": "May", "population": 8500, "registeredUsers": 1920, "activeUsers": 1280, "dau": 448, "avgSpeedMbps": 11.2, "networkUptimePercent": 90.4, "costPerUserSDG": 8000, "educationUsagePercent": 41, "farmingUsagePercent": 28.2, "socialUsagePercent": 38 },
+    { "month": "Jun", "population": 8500, "registeredUsers": 2100, "activeUsers": 1400, "dau": 489, "avgSpeedMbps": 12, "networkUptimePercent": 91, "costPerUserSDG": 7500, "educationUsagePercent": 42.5, "farmingUsagePercent": 29, "socialUsagePercent": 37.5 },
+    { "month": "Jul", "population": 8500, "registeredUsers": 2280, "activeUsers": 1520, "dau": 532, "avgSpeedMbps": 12.8, "networkUptimePercent": 91.6, "costPerUserSDG": 7000, "educationUsagePercent": 44, "farmingUsagePercent": 29.8, "socialUsagePercent": 37 },
+    { "month": "Aug", "population": 8500, "registeredUsers": 2460, "activeUsers": 1640, "dau": 574, "avgSpeedMbps": 13.6, "networkUptimePercent": 92.2, "costPerUserSDG": 6500, "educationUsagePercent": 45.5, "farmingUsagePercent": 30.6, "socialUsagePercent": 36.5 },
+    { "month": "Sep", "population": 8500, "registeredUsers": 2640, "activeUsers": 1760, "dau": 616, "avgSpeedMbps": 14.4, "networkUptimePercent": 92.8, "costPerUserSDG": 6000, "educationUsagePercent": 47, "farmingUsagePercent": 31.4, "socialUsagePercent": 36 },
+    { "month": "Oct", "population": 8500, "registeredUsers": 2820, "activeUsers": 1880, "dau": 658, "avgSpeedMbps": 15.2, "networkUptimePercent": 93.4, "costPerUserSDG": 5500, "educationUsagePercent": 48.5, "farmingUsagePercent": 32.2, "socialUsagePercent": 35.5 },
+    { "month": "Nov", "population": 8500, "registeredUsers": 3000, "activeUsers": 2000, "dau": 700, "avgSpeedMbps": 16, "networkUptimePercent": 94, "costPerUserSDG": 5000, "educationUsagePercent": 50, "farmingUsagePercent": 33, "socialUsagePercent": 35 },
+    { "month": "Dec", "population": 8500, "registeredUsers": 3180, "activeUsers": 2120, "dau": 742, "avgSpeedMbps": 16.8, "networkUptimePercent": 94.6, "costPerUserSDG": 4500, "educationUsagePercent": 51.5, "farmingUsagePercent": 33.8, "socialUsagePercent": 34.5 }
+  ]
+}

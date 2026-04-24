@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { 
   Users, 
-  DollarSign, 
   Activity, 
   Zap, 
   ArrowLeft, 
@@ -21,20 +20,24 @@ import {
   Signal
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import data from '@/data/data.json';
 
 export default function DashboardPage() {
-  const { t, isRTL } = useLanguage();
+  const { isRTL } = useLanguage();
 
-  const Q4_DATA = [
-    { month: 'October', users: '1880', speed: '15.2', uptime: '93.4%', cost: '5500' },
-    { month: 'November', users: '2000', speed: '16.0', uptime: '94.0%', cost: '5000' },
-    { month: 'December', users: '2120', speed: '16.8', uptime: '94.6%', cost: '4500' },
-  ];
+  // Extract necessary data from mock database
+  const { kpiSummary, monthlyData } = data;
+  
+  // Get Q4 Data (Oct, Nov, Dec)
+  const q4Data = monthlyData.filter(m => ['Oct', 'Nov', 'Dec'].includes(m.month));
+  
+  // Get latest month (December) for usage breakdown
+  const latestMonth = monthlyData[monthlyData.length - 1];
 
   const USAGE_BREAKDOWN = [
-    { label: 'Education', percentage: 51.5, color: 'bg-blue-500', icon: <School size={16} className="text-blue-500" /> },
-    { label: 'Farming / Agriculture', percentage: 33.8, color: 'bg-emerald-500', icon: <Sprout size={16} className="text-emerald-500" /> },
-    { label: 'Social / Other', percentage: 34.5, color: 'bg-slate-400', icon: <MessageCircle size={16} className="text-slate-400" /> },
+    { label: 'Education', percentage: latestMonth.educationUsagePercent, color: 'bg-blue-500', icon: <School size={16} className="text-blue-500" /> },
+    { label: 'Farming / Agriculture', percentage: latestMonth.farmingUsagePercent, color: 'bg-emerald-500', icon: <Sprout size={16} className="text-emerald-500" /> },
+    { label: 'Social / Other', percentage: latestMonth.socialUsagePercent, color: 'bg-slate-400', icon: <MessageCircle size={16} className="text-slate-400" /> },
   ];
 
   return (
@@ -128,8 +131,8 @@ export default function DashboardPage() {
             </div>
             <div>
               <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">Active Users</p>
-              <h3 className="text-4xl font-black text-slate-900 tracking-tight">2,120</h3>
-              <p className="text-sm text-slate-400 mt-2 font-medium">Peak DAU: <span className="text-slate-600 font-bold">742</span></p>
+              <h3 className="text-4xl font-black text-slate-900 tracking-tight">{kpiSummary.maxActiveUsers.toLocaleString()}</h3>
+              <p className="text-sm text-slate-400 mt-2 font-medium">Peak DAU: <span className="text-slate-600 font-bold">{kpiSummary.peakDAU}</span></p>
             </div>
           </div>
 
@@ -145,7 +148,7 @@ export default function DashboardPage() {
             </div>
             <div>
               <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">Cost Per User</p>
-              <h3 className="text-4xl font-black text-emerald-600 tracking-tight">4,500 <span className="text-base font-black">SDG</span></h3>
+              <h3 className="text-4xl font-black text-emerald-600 tracking-tight">{latestMonth.costPerUserSDG.toLocaleString()} <span className="text-base font-black">SDG</span></h3>
               <p className="text-sm text-slate-400 mt-2 font-medium leading-tight">Down from 10k SDG in Jan</p>
             </div>
           </div>
@@ -160,8 +163,8 @@ export default function DashboardPage() {
             </div>
             <div>
               <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">Network Uptime</p>
-              <h3 className="text-4xl font-black text-slate-900 tracking-tight">94.6%</h3>
-              <p className="text-sm text-slate-400 mt-2 font-medium">Avg Baseline: <span className="text-slate-600 font-bold">92%</span></p>
+              <h3 className="text-4xl font-black text-slate-900 tracking-tight">{latestMonth.networkUptimePercent}%</h3>
+              <p className="text-sm text-slate-400 mt-2 font-medium">Avg Baseline: <span className="text-slate-600 font-bold">{kpiSummary.avgNetworkUptimePercent}%</span></p>
             </div>
           </div>
 
@@ -174,8 +177,8 @@ export default function DashboardPage() {
             </div>
             <div>
               <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">Avg Speed</p>
-              <h3 className="text-4xl font-black text-slate-900 tracking-tight">16.8 <span className="text-base font-black text-slate-400">Mbps</span></h3>
-              <p className="text-sm text-slate-400 mt-2 font-medium">Target Coverage: <span className="text-slate-600 font-bold">90%</span></p>
+              <h3 className="text-4xl font-black text-slate-900 tracking-tight">{latestMonth.avgSpeedMbps} <span className="text-base font-black text-slate-400">Mbps</span></h3>
+              <p className="text-sm text-slate-400 mt-2 font-medium">Target Coverage: <span className="text-slate-600 font-bold">{kpiSummary.targetCoveragePercent}%</span></p>
             </div>
           </div>
         </div>
@@ -187,7 +190,7 @@ export default function DashboardPage() {
               <div className="p-2 bg-slate-900 text-white rounded-lg">
                 <Globe size={20} />
               </div>
-              <h2 className="text-xl font-black text-slate-900 leading-tight">Network Usage Breakdown <span className="text-slate-400 block text-xs font-bold uppercase tracking-wider mt-1">(December)</span></h2>
+              <h2 className="text-xl font-black text-slate-900 leading-tight">Network Usage Breakdown <span className="text-slate-400 block text-xs font-bold uppercase tracking-wider mt-1">({latestMonth.month})</span></h2>
             </div>
             
             <div className="space-y-8 flex-1">
@@ -241,36 +244,38 @@ export default function DashboardPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-50 bg-white">
-                  {Q4_DATA.map((row, index) => (
+                  {q4Data.map((row, index) => (
                     <tr key={index} className="hover:bg-slate-50/50 transition-colors group">
                       <td className="py-5 px-8">
-                        <span className="text-sm font-black text-slate-900 group-hover:text-emerald-600 transition-colors">{row.month}</span>
+                        <span className="text-sm font-black text-slate-900 group-hover:text-emerald-600 transition-colors">
+                          {row.month === 'Oct' ? 'October' : row.month === 'Nov' ? 'November' : 'December'}
+                        </span>
                       </td>
                       <td className="py-5 px-8">
                         <div className="flex items-center gap-2">
                           <Users size={14} className="text-slate-300" />
-                          <span className="text-sm font-bold text-slate-600">{row.users}</span>
+                          <span className="text-sm font-bold text-slate-600">{row.activeUsers.toLocaleString()}</span>
                         </div>
                       </td>
                       <td className="py-5 px-8">
                         <div className="flex items-center gap-2">
                           <Zap size={14} className="text-purple-400" />
-                          <span className="text-sm font-bold text-slate-600">{row.speed}</span>
+                          <span className="text-sm font-bold text-slate-600">{row.avgSpeedMbps}</span>
                         </div>
                       </td>
                       <td className="py-5 px-8">
                         <div className="flex items-center gap-2">
                           <Activity size={14} className="text-amber-400" />
-                          <span className="text-sm font-bold text-slate-600">{row.uptime}</span>
+                          <span className="text-sm font-bold text-slate-600">{row.networkUptimePercent}%</span>
                         </div>
                       </td>
                       <td className="py-5 px-8 text-right">
                         <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-xs font-black ring-1 transition-all ${
-                          parseInt(row.cost) <= 4500 
+                          row.costPerUserSDG <= 4500 
                             ? 'bg-emerald-50 text-emerald-600 ring-emerald-100' 
                             : 'bg-slate-50 text-slate-600 ring-slate-100'
                         }`}>
-                          {row.cost}
+                          {row.costPerUserSDG.toLocaleString()}
                         </span>
                       </td>
                     </tr>
