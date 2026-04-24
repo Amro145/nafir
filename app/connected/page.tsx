@@ -2,9 +2,11 @@
 
 import { CheckCircle, Globe, BookOpen } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ConnectedPage() {
   const router = useRouter();
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 overflow-hidden relative">
@@ -24,9 +26,9 @@ export default function ConnectedPage() {
             </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-white mb-3 tracking-tight">You're Connected!</h1>
+          <h1 className="text-3xl font-bold text-white mb-3 tracking-tight">{t('connected_title')}</h1>
           <p className="text-slate-300 mb-8 leading-relaxed text-sm">
-            Your device is now successfully authenticated on the <span className="text-white font-semibold">RuralNet Sudan</span> local network.
+            {t('connected_msg')}
           </p>
 
           <div className="w-full space-y-4">
@@ -35,7 +37,7 @@ export default function ConnectedPage() {
               className="w-full flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 active:scale-[0.98] shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)]"
             >
               <Globe size={20} />
-              Start Browsing
+              {t('start_browsing')}
             </button>
 
             <button
@@ -44,9 +46,9 @@ export default function ConnectedPage() {
             >
               <div className="flex items-center gap-3">
                 <BookOpen size={20} className="text-blue-400" />
-                <span className="text-sm">Educational Content</span>
+                <span className="text-sm">{t('edu_content')}</span>
               </div>
-              <span className="text-[10px] bg-white/10 px-2 py-1 rounded text-slate-300 uppercase tracking-wider font-semibold">Offline</span>
+              <span className="text-[10px] bg-white/10 px-2 py-1 rounded text-slate-300 uppercase tracking-wider font-semibold">{t('offline')}</span>
             </button>
           </div>
 
