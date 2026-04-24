@@ -5,186 +5,288 @@ import {
   Users, 
   DollarSign, 
   Activity, 
-  Signal, 
+  Zap, 
   ArrowLeft, 
   LayoutDashboard, 
   Settings, 
   LogOut,
-  CheckCircle2,
-  Menu
+  Menu,
+  TrendingDown,
+  TrendingUp,
+  School,
+  Sprout,
+  MessageCircle,
+  BarChart3,
+  Globe,
+  Signal
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 export default function DashboardPage() {
   const { t, isRTL } = useLanguage();
 
-  const MOCK_REDEMPTIONS = [
-    { id: 'USR-8902', type: t('daily_access'), time: `10 ${t('mins_ago')}`, status: t('success') },
-    { id: 'USR-8891', type: t('weekly_premium'), time: `45 ${t('mins_ago')}`, status: t('success') },
-    { id: 'USR-8845', type: t('daily_access'), time: `2 ${t('hours_ago')}`, status: t('success') },
-    { id: 'USR-8722', type: t('daily_access'), time: `3 ${t('hours_ago')}`, status: t('success') },
-    { id: 'USR-8650', type: t('weekly_premium'), time: `5 ${t('hours_ago')}`, status: t('success') },
+  const Q4_DATA = [
+    { month: 'October', users: '1880', speed: '15.2', uptime: '93.4%', cost: '5500' },
+    { month: 'November', users: '2000', speed: '16.0', uptime: '94.0%', cost: '5000' },
+    { month: 'December', users: '2120', speed: '16.8', uptime: '94.6%', cost: '4500' },
+  ];
+
+  const USAGE_BREAKDOWN = [
+    { label: 'Education', percentage: 51.5, color: 'bg-blue-500', icon: <School size={16} className="text-blue-500" /> },
+    { label: 'Farming / Agriculture', percentage: 33.8, color: 'bg-emerald-500', icon: <Sprout size={16} className="text-emerald-500" /> },
+    { label: 'Social / Other', percentage: 34.5, color: 'bg-slate-400', icon: <MessageCircle size={16} className="text-slate-400" /> },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row">
-      {/* Mobile Header (visible only on mobile) */}
-      <div className="md:hidden bg-slate-900 text-white p-4 flex justify-between items-center sticky top-0 z-20 shadow-md">
+    <div className="min-h-screen bg-[#f8fafc] flex flex-col md:flex-row font-sans selection:bg-emerald-100 selection:text-emerald-900">
+      {/* Mobile Header */}
+      <div className="md:hidden bg-[#0f172a] text-white p-4 flex justify-between items-center sticky top-0 z-20 shadow-md">
         <div className="font-bold text-lg tracking-tight flex items-center gap-2">
-          <Signal className="text-emerald-500" size={20} />
-          {t('branding')}
+          <Globe className="text-emerald-500" size={20} />
+          RuralNet Sudan
         </div>
         <button className="p-2 hover:bg-slate-800 rounded-md transition-colors">
           <Menu size={22} />
         </button>
       </div>
 
-      {/* Sidebar Navigation */}
-      <aside className={`hidden md:flex flex-col w-64 bg-slate-900 text-slate-300 min-h-screen fixed ${isRTL ? 'right-0' : 'left-0'} top-0 bottom-0 z-10 shadow-2xl`}>
-        <div className="p-6 border-b border-slate-800/60">
-          <h2 className="text-xl font-extrabold text-white tracking-tight flex items-center gap-2.5">
-            <Signal className="text-emerald-500" size={24} />
-            RuralNet
-          </h2>
-          <p className={`text-[10px] text-slate-400 mt-1.5 uppercase font-bold tracking-widest ${isRTL ? 'pr-8' : 'pl-8'}`}>{t('manager')}</p>
+      {/* Sidebar - Enhanced for Premium Feel */}
+      <aside className={`hidden md:flex flex-col w-72 bg-[#0f172a] text-slate-300 min-h-screen fixed ${isRTL ? 'right-0' : 'left-0'} top-0 bottom-0 z-10 shadow-2xl border-r border-white/5`}>
+        <div className="p-8">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-2 bg-emerald-500 rounded-lg shadow-lg shadow-emerald-500/20">
+              <Globe className="text-white" size={24} />
+            </div>
+            <h2 className="text-xl font-bold text-white tracking-tight">RuralNet Sudan</h2>
+          </div>
+          <div className="flex flex-col mt-4 p-3 bg-white/5 rounded-xl border border-white/10">
+            <p className="text-[10px] text-emerald-400 uppercase font-black tracking-widest mb-1">Lead Developer</p>
+            <p className="text-sm font-medium text-white">Amro Altayeb</p>
+          </div>
         </div>
 
-        <nav className="flex-1 p-4 space-y-2">
-          <Link href="/dashboard" className="flex items-center gap-3 bg-emerald-600/15 text-emerald-400 px-4 py-3.5 rounded-xl transition-colors border border-emerald-500/20">
-            <LayoutDashboard size={20} />
-            <span className="font-medium">{t('overview')}</span>
+        <nav className="flex-1 px-4 space-y-1.5">
+          <Link href="/dashboard" className="flex items-center gap-3 bg-emerald-500/10 text-emerald-400 px-4 py-3 rounded-xl transition-all border border-emerald-500/20 shadow-sm">
+            <LayoutDashboard size={18} />
+            <span className="font-semibold text-sm">Executive Overview</span>
           </Link>
-          <button className="w-full flex items-center gap-3 hover:bg-slate-800 hover:text-white px-4 py-3.5 rounded-xl transition-colors text-left group">
-            <Users size={20} className="text-slate-500 group-hover:text-white transition-colors" />
-            <span className="font-medium">{t('subscribers')}</span>
+          <button className="w-full flex items-center gap-3 hover:bg-white/5 hover:text-white px-4 py-3 rounded-xl transition-all text-left group">
+            <Users size={18} className="text-slate-500 group-hover:text-emerald-400 transition-colors" />
+            <span className="font-medium text-sm">Network Analytics</span>
           </button>
-          <button className="w-full flex items-center gap-3 hover:bg-slate-800 hover:text-white px-4 py-3.5 rounded-xl transition-colors text-left group">
-            <Settings size={20} className="text-slate-500 group-hover:text-white transition-colors" />
-            <span className="font-medium">{t('settings')}</span>
+          <button className="w-full flex items-center gap-3 hover:bg-white/5 hover:text-white px-4 py-3 rounded-xl transition-all text-left group">
+            <Settings size={18} className="text-slate-500 group-hover:text-emerald-400 transition-colors" />
+            <span className="font-medium text-sm">System Settings</span>
           </button>
         </nav>
 
-        <div className="p-4 border-t border-slate-800/60">
-          <Link href="/" className="flex items-center gap-3 hover:bg-slate-800 hover:text-white px-4 py-3.5 rounded-xl transition-colors group">
-            <ArrowLeft size={20} className={`text-slate-500 group-hover:text-white transition-colors ${isRTL ? 'rotate-180' : ''}`} />
-            <span className="font-medium">{t('back_home')}</span>
+        <div className="p-6 border-t border-white/5 space-y-2">
+          <Link href="/" className="flex items-center gap-3 hover:bg-white/5 hover:text-white px-4 py-3 rounded-xl transition-all group">
+            <ArrowLeft size={18} className={`text-slate-500 group-hover:text-white transition-colors ${isRTL ? 'rotate-180' : ''}`} />
+            <span className="font-medium text-sm">Portal Home</span>
           </Link>
-          <button className="w-full mt-2 flex items-center gap-3 hover:bg-red-500/10 hover:text-red-400 text-slate-400 px-4 py-3.5 rounded-xl transition-colors text-left">
-            <LogOut size={20} />
-            <span className="font-medium">{t('sign_out')}</span>
+          <button className="w-full flex items-center gap-3 hover:bg-red-500/10 hover:text-red-400 text-slate-400 px-4 py-3 rounded-xl transition-all text-left group">
+            <LogOut size={18} className="group-hover:text-red-400" />
+            <span className="font-medium text-sm">Logout</span>
           </button>
         </div>
       </aside>
 
       {/* Main Content Area */}
-      <main className={`flex-1 ${isRTL ? 'md:mr-64' : 'md:ml-64'} p-4 md:p-8 lg:p-10`}>
+      <main className={`flex-1 ${isRTL ? 'md:mr-72' : 'md:ml-72'} p-6 md:p-10 lg:p-12`}>
         
-        {/* Mobile Back to Home (Visible on mobile only) */}
-        <div className="md:hidden mb-6 mt-2">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-900 font-semibold transition-colors bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm">
-            <ArrowLeft size={16} className={isRTL ? 'rotate-180' : ''} />
-            {t('back_home')}
-          </Link>
-        </div>
-
-        <header className="mb-8 md:mb-10">
-          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">{t('dash_title')}</h1>
-          <p className="text-slate-500 mt-2 font-medium">{t('dash_subtitle')}</p>
+        <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-wider mb-3">
+              <Zap size={12} fill="currentColor" />
+              Live Network Status
+            </div>
+            <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">Growth & Impact Dashboard</h1>
+            <p className="text-slate-500 mt-2 font-medium text-lg italic">Built for Hackathon Presentation • 2024</p>
+          </div>
+          <div className="hidden md:block text-right">
+            <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mb-1">Status</p>
+            <p className="text-sm font-bold text-emerald-600 bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+              Systems Operational
+            </p>
+          </div>
         </header>
 
-        {/* KPI Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8 md:mb-10">
-          {/* Card 1: Users */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 flex flex-col hover:shadow-md transition-shadow">
-            <div className={`flex justify-between items-start mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <div className="p-3 bg-blue-50 text-blue-600 rounded-xl ring-1 ring-blue-100">
-                <Users size={24} />
+        {/* Top KPI Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+          {/* Card 1: Active Users */}
+          <div className="bg-white p-7 rounded-[2rem] shadow-sm border border-slate-200/60 flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div className="flex justify-between items-start mb-6">
+              <div className="p-4 bg-blue-50 text-blue-600 rounded-2xl ring-1 ring-blue-100 shadow-inner">
+                <Users size={24} strokeWidth={2.5} />
+              </div>
+              <div className="flex items-center gap-1 text-emerald-600 font-bold text-xs bg-emerald-50 px-2 py-1 rounded-md">
+                <TrendingUp size={14} />
+                +12.4%
               </div>
             </div>
             <div>
-              <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">{t('total_users')}</p>
-              <h3 className="text-3xl font-black text-slate-900 tracking-tight">142 <span className="text-sm font-bold text-emerald-500 ml-1 uppercase tracking-wider">{t('active')}</span></h3>
+              <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">Active Users</p>
+              <h3 className="text-4xl font-black text-slate-900 tracking-tight">2,120</h3>
+              <p className="text-sm text-slate-400 mt-2 font-medium">Peak DAU: <span className="text-slate-600 font-bold">742</span></p>
             </div>
           </div>
 
-          {/* Card 2: Revenue */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 flex flex-col hover:shadow-md transition-shadow">
-            <div className={`flex justify-between items-start mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl ring-1 ring-emerald-100">
-                <DollarSign size={24} />
+          {/* Card 2: Cost Per User */}
+          <div className="bg-white p-7 rounded-[2rem] shadow-sm border border-slate-200/60 flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div className="flex justify-between items-start mb-6">
+              <div className="p-4 bg-emerald-50 text-emerald-600 rounded-2xl ring-1 ring-emerald-100 shadow-inner">
+                <BarChart3 size={24} strokeWidth={2.5} />
+              </div>
+              <div className="flex items-center gap-1 text-emerald-600 font-bold text-xs bg-emerald-50 px-2 py-1 rounded-md uppercase tracking-wider">
+                Efficiency High
               </div>
             </div>
             <div>
-              <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">{t('revenue')}</p>
-              <h3 className="text-3xl font-black text-slate-900 tracking-tight">45,000 <span className="text-sm text-slate-500 font-bold ml-1">{t('sdg')}</span></h3>
+              <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">Cost Per User</p>
+              <h3 className="text-4xl font-black text-emerald-600 tracking-tight">4,500 <span className="text-base font-black">SDG</span></h3>
+              <p className="text-sm text-slate-400 mt-2 font-medium leading-tight">Down from 10k SDG in Jan</p>
             </div>
           </div>
 
-          {/* Card 3: Uptime */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 flex flex-col hover:shadow-md transition-shadow">
-            <div className={`flex justify-between items-start mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <div className="p-3 bg-amber-50 text-amber-600 rounded-xl ring-1 ring-amber-100">
-                <Activity size={24} />
+          {/* Card 3: Network Uptime */}
+          <div className="bg-white p-7 rounded-[2rem] shadow-sm border border-slate-200/60 flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div className="flex justify-between items-start mb-6">
+              <div className="p-4 bg-amber-50 text-amber-600 rounded-2xl ring-1 ring-amber-100 shadow-inner">
+                <Activity size={24} strokeWidth={2.5} />
               </div>
+              <div className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse mt-2"></div>
             </div>
             <div>
-              <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">{t('uptime')}</p>
-              <h3 className="text-3xl font-black text-slate-900 tracking-tight">99.8%</h3>
+              <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">Network Uptime</p>
+              <h3 className="text-4xl font-black text-slate-900 tracking-tight">94.6%</h3>
+              <p className="text-sm text-slate-400 mt-2 font-medium">Avg Baseline: <span className="text-slate-600 font-bold">92%</span></p>
             </div>
           </div>
 
-          {/* Card 4: Bandwidth */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/60 flex flex-col hover:shadow-md transition-shadow">
-            <div className={`flex justify-between items-start mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <div className="p-3 bg-purple-50 text-purple-600 rounded-xl ring-1 ring-purple-100">
-                <Signal size={24} />
+          {/* Card 4: Avg Speed */}
+          <div className="bg-white p-7 rounded-[2rem] shadow-sm border border-slate-200/60 flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div className="flex justify-between items-start mb-6">
+              <div className="p-4 bg-purple-50 text-purple-600 rounded-2xl ring-1 ring-purple-100 shadow-inner">
+                <Signal size={24} strokeWidth={2.5} />
               </div>
             </div>
             <div>
-              <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">{t('usage')}</p>
-              <h3 className="text-3xl font-black text-slate-900 tracking-tight">2.4 <span className="text-xl text-slate-600 font-bold">GB</span> <span className="text-slate-300 font-light mx-1">/</span> <span className="text-xl text-slate-500 font-bold">5 GB</span></h3>
+              <p className="text-sm text-slate-500 font-bold uppercase tracking-wider mb-1">Avg Speed</p>
+              <h3 className="text-4xl font-black text-slate-900 tracking-tight">16.8 <span className="text-base font-black text-slate-400">Mbps</span></h3>
+              <p className="text-sm text-slate-400 mt-2 font-medium">Target Coverage: <span className="text-slate-600 font-bold">90%</span></p>
             </div>
           </div>
         </div>
 
-        {/* Recent Activity Table */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200/60 overflow-hidden">
-          <div className="p-6 border-b border-slate-100 bg-slate-50/50">
-            <h2 className="text-lg font-bold text-slate-900">{t('recent_activity')}</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10">
+          {/* Social Impact Section */}
+          <div className="lg:col-span-4 bg-white p-8 rounded-[2rem] shadow-sm border border-slate-200/60 flex flex-col">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-2 bg-slate-900 text-white rounded-lg">
+                <Globe size={20} />
+              </div>
+              <h2 className="text-xl font-black text-slate-900 leading-tight">Network Usage Breakdown <span className="text-slate-400 block text-xs font-bold uppercase tracking-wider mt-1">(December)</span></h2>
+            </div>
+            
+            <div className="space-y-8 flex-1">
+              {USAGE_BREAKDOWN.map((item, idx) => (
+                <div key={idx} className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      {item.icon}
+                      <span className="text-sm font-bold text-slate-700">{item.label}</span>
+                    </div>
+                    <span className="text-sm font-black text-slate-900">{item.percentage}%</span>
+                  </div>
+                  <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full ${item.color} rounded-full transition-all duration-1000 shadow-[0_0_8px_rgba(0,0,0,0.05)]`} 
+                      style={{ width: `${item.percentage}%` }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10 p-5 bg-blue-50 rounded-2xl border border-blue-100">
+              <p className="text-xs text-blue-700 font-black uppercase tracking-widest mb-1">Impact Highlight</p>
+              <p className="text-sm text-blue-900/80 font-medium leading-relaxed italic">"Our data shows that over half of network capacity is directly supporting educational initiatives in the region."</p>
+            </div>
           </div>
-          
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[600px]">
-              <thead>
-                <tr className="text-slate-400 text-xs uppercase tracking-wider border-b border-slate-100 font-semibold bg-white">
-                  <th className={`py-4 px-6 ${isRTL ? 'text-right' : 'text-left'}`}>{t('user_id')}</th>
-                  <th className={`py-4 px-6 ${isRTL ? 'text-right' : 'text-left'}`}>{t('voucher_type')}</th>
-                  <th className={`py-4 px-6 ${isRTL ? 'text-right' : 'text-left'}`}>{t('time')}</th>
-                  <th className={`py-4 px-6 ${isRTL ? 'text-left' : 'text-right'}`}>{t('status')}</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 bg-white">
-                {MOCK_REDEMPTIONS.map((item, index) => (
-                  <tr key={index} className="hover:bg-slate-50/50 transition-colors group">
-                    <td className="py-4 px-6 text-sm font-bold text-slate-700 group-hover:text-slate-900 transition-colors">{item.id}</td>
-                    <td className="py-4 px-6 text-sm">
-                      <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wide ${
-                        item.type === t('daily_access') ? 'bg-blue-50 text-blue-600 ring-1 ring-blue-100 inset-0' : 'bg-purple-50 text-purple-600 ring-1 ring-purple-100 inset-0'
-                      }`}>
-                        {item.type}
-                      </span>
-                    </td>
-                    <td className="py-4 px-6 text-sm font-medium text-slate-500">{item.time}</td>
-                    <td className={`py-4 px-6 text-sm ${isRTL ? 'text-left' : 'text-right'}`}>
-                      <div className="inline-flex items-center gap-1.5 text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full font-bold text-xs ring-1 ring-emerald-100/50">
-                        <CheckCircle2 size={14} strokeWidth={3} />
-                        {item.status}
-                      </div>
-                    </td>
+
+          {/* Q4 Performance & Growth Table */}
+          <div className="lg:col-span-8 bg-white rounded-[2rem] shadow-sm border border-slate-200/60 overflow-hidden flex flex-col">
+            <div className="p-8 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-black text-slate-900">Q4 Performance & Growth</h2>
+                <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mt-1">Quarterly Benchmarks</p>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-xl border border-slate-100 text-xs font-bold text-slate-500">
+                <BarChart3 size={14} />
+                Regional Performance Data
+              </div>
+            </div>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr className="text-slate-400 text-[10px] uppercase tracking-[0.2em] border-b border-slate-100 font-black bg-slate-50/30">
+                    <th className="py-5 px-8">Month</th>
+                    <th className="py-5 px-8">Active Users</th>
+                    <th className="py-5 px-8">Speed (Mbps)</th>
+                    <th className="py-5 px-8">Uptime (%)</th>
+                    <th className="py-5 px-8 text-right">Cost/User (SDG)</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-slate-50 bg-white">
+                  {Q4_DATA.map((row, index) => (
+                    <tr key={index} className="hover:bg-slate-50/50 transition-colors group">
+                      <td className="py-5 px-8">
+                        <span className="text-sm font-black text-slate-900 group-hover:text-emerald-600 transition-colors">{row.month}</span>
+                      </td>
+                      <td className="py-5 px-8">
+                        <div className="flex items-center gap-2">
+                          <Users size={14} className="text-slate-300" />
+                          <span className="text-sm font-bold text-slate-600">{row.users}</span>
+                        </div>
+                      </td>
+                      <td className="py-5 px-8">
+                        <div className="flex items-center gap-2">
+                          <Zap size={14} className="text-purple-400" />
+                          <span className="text-sm font-bold text-slate-600">{row.speed}</span>
+                        </div>
+                      </td>
+                      <td className="py-5 px-8">
+                        <div className="flex items-center gap-2">
+                          <Activity size={14} className="text-amber-400" />
+                          <span className="text-sm font-bold text-slate-600">{row.uptime}</span>
+                        </div>
+                      </td>
+                      <td className="py-5 px-8 text-right">
+                        <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-xs font-black ring-1 transition-all ${
+                          parseInt(row.cost) <= 4500 
+                            ? 'bg-emerald-50 text-emerald-600 ring-emerald-100' 
+                            : 'bg-slate-50 text-slate-600 ring-slate-100'
+                        }`}>
+                          {row.cost}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="p-6 bg-slate-50/50 border-t border-slate-100 mt-auto">
+              <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-widest">
+                <span>Verified by Awad • Data Analysis Team</span>
+                <span className="flex items-center gap-2 text-emerald-500">
+                  <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                  Nodes Optimized
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
